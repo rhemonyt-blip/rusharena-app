@@ -5,6 +5,8 @@ import axios from "axios";
 import { showToast } from "@/app/component/application/tostify";
 import { useSearchParams } from "next/navigation";
 
+import MatchRule from "@/app/component/application/matchRule";
+
 export default function MatchDetails() {
   const searchParams = useSearchParams();
   const matchId = searchParams.get("matchId");
@@ -128,6 +130,8 @@ export default function MatchDetails() {
           </ul>
         </div>
       )}
+
+      <MatchRule matchType={match.matchType} />
 
       {/* Joined Players */}
       <div className="bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-700">

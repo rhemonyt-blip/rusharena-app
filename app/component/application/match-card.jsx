@@ -19,12 +19,20 @@ import {
   MatchType4,
   MatchType5,
   MatchType6,
+  MatchType7,
+  MatchType8,
+  MatchType9,
+  MatchType10,
   MatchType1Img,
   MatchType2Img,
   MatchType3Img,
   MatchType4Img,
   MatchType5Img,
   MatchType6Img,
+  MatchType7Img,
+  MatchType8Img,
+  MatchType9Img,
+  MatchType10Img
 } from "@/config";
 
 const matches = [
@@ -58,7 +66,29 @@ const matches = [
     link: `/play-match/?type=${MatchType6}`,
     image: MatchType6Img,
   },
+  {
+    title: MatchType7,
+    link: `/play-match/?type=${MatchType7}`,
+    image: MatchType7Img,
+  },
+  {
+    title: MatchType8,
+    link: `/play-match/?type=${MatchType8}`,
+    image: MatchType8Img,
+  },
+  
+  {
+    title: MatchType9,
+    link: `/play-match/?type=${MatchType9}`,
+    image: MatchType9Img,
+  },
+  {
+    title: MatchType10,
+    link: `/play-match/?type=${MatchType10}`,
+    image: MatchType10Img,
+  },
 ];
+   
 
 export default function MatchCards() {
   const [counts, setCounts] = useState({});
