@@ -1,0 +1,15 @@
+{
+  "appId": "com.rusharena.app",
+  "appName": "Rush Arena",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://www.rusharena.club",
+    "cleartext": false
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

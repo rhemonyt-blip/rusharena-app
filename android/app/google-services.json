@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "378607919976",
+    "project_id": "rusharena-825c1",
+    "storage_bucket": "rusharena-825c1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378607919976:android:f463ce1cf8d2b170b4acdd",
+        "android_client_info": {
+          "package_name": "com.rusharena.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-EX28zqT_w8g9if4WjJ-Jsrvq2h7PcQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
