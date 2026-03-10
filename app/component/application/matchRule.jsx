@@ -480,7 +480,7 @@ export default function MatchRule({ matchType }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a1a] text-white p-4">
+    <div className=" bg-[#0a0a1a] text-white p-4">
       <h1 className="text-center text-2xl font-bold mb-4">All Rules</h1>
 
       {/* Tabs */}
