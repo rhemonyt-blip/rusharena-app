@@ -21,7 +21,7 @@ export default function topPlayersPage() {
   useEffect(() => {
     const fetchtopPlayers = async () => {
       try {
-        const res = await axios.get("/api/topPlayers");
+        const res = await axios.get(`/api/topPlayers`);
         setPlayers(res.data);
       } catch (error) {
         console.error("Failed to load topPlayers", error);

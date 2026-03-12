@@ -15,7 +15,7 @@ const MarqueeText = () => {
   useEffect(() => {
     const fetchMsg = async () => {
       try {
-        const res = await axios.get("/api/massage", {
+        const res = await axios.get(`/api/massage`, {
           params: { type: "msg" },
         });
 

@@ -689,6 +689,47 @@ export default function MatchRule({ matchType }) {
         টাকা রিফান্ড করা হবে না।
       </p>
     </>,
+    <>
+      <p className="text-yellow-400 font-semibold text-lg mt-3">
+        🎲 Rush ARena Match নিয়মাবলি:
+      </p>
+
+      <p className="text-blue-400 mt-3">
+        📱 Rush ARena Match Support টেলিগ্রাম গ্রুপে জয়েন করতে হবে।
+      </p>
+
+      <p className="text-green-400 mt-3">
+        🖼️ ম্যাচে Win হবার পরে Winning স্ক্রিনশট নিবেন। ম্যাচ খেলার সময় ১/২ টি
+        স্ক্রিনশট নিবেন এবং ম্যাচ Start হবার সময় ১০/১৫ সেকেন্ড এর একটি
+        স্ক্রিনরেকর্ড করতে হবে। এগুলো ম্যাচ শেষে ৫-১০ মিনিটের মধ্যে Caption সহ
+        Rush Arena Match Support গ্রুপে সেন্ড করতে হবে।
+      </p>
+
+      <p className="text-red-400 mt-3">
+        ✍️ গ্রুপে সেন্ড করার সময় Captipn এ SMS এ Match Time / Match No লিখে দিতে
+        হবে, তা না হলে রিওয়ার্ড পাবেন না।
+      </p>
+
+      <p className="text-red-400 mt-3">
+        ⚠️ Match তে কেউ কোনো প্রকার প্রতারণা করার চেষ্টা করলে অথবা Fake
+        স্ক্রিনশট Edit করে গ্রুপে দিলে "Rush ARena" App থেকে Ban দেওয়া হবে।
+      </p>
+
+      <p className="text-yellow-400 mt-3">
+        🧾 "Rush ARena" অ্যাপে যে নামে ম্যাচে জয়েন হয়েছেন, "Match King" অ্যাপে
+        সে নামের সাথে মিল না থাকলে রিওয়ার্ড পাবেন না।
+      </p>
+
+      <p className="text-blue-400 mt-3">
+        🔑 Room ID & Pass ম্যাচ টাইমের ৫-৬ মিনিট আগে Room Details এ দেওয়া হবে।
+        সময় মত ম্যাচে জয়েন না করতে পারলে রিফান্ড পাবেন না।
+      </p>
+
+      <p className="text-green-400 mt-3">
+        👤 আপনি ম্যাচে জয়েন করার পরে Opponent রুমে জয়েন না করলে আপনাকে ম্যাচের
+        টাকা রিফান্ড করা হবে না।
+      </p>
+    </>,
     "",
   ];
 
