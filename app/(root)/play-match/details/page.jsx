@@ -5,6 +5,7 @@ import axios from "axios";
 import { showToast } from "@/app/component/application/tostify";
 import { useSearchParams } from "next/navigation";
 import MatchRule from "@/app/component/application/matchRule";
+import { Preferences } from "@capacitor/preferences";
 
 export default function MatchDetails() {
   const searchParams = useSearchParams();
@@ -16,9 +17,11 @@ export default function MatchDetails() {
   const [userAuthId, setUserAuthId] = useState(null);
 
   // get logged user authId
-  useEffect(() => {
-    const authId = localStorage.getItem("authId");
-    setUserAuthId(authId);
+  useEffect( async() => {
+    const { value } = await Preferences.get({ key: "access_token" });
+if(value) {
+  setUserAuthId(value);
+}
   }, []);
 
   useEffect(() => {
