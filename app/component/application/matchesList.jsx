@@ -100,7 +100,7 @@ const PlayMatch = () => {
       setError(null);
 
       try {
-        const res = await axios.get(`${process.env.WEB_URL}api/matches`, {
+        const res = await axios.get(`/api/matches`, {
           params: { type: matchType },
         });
 

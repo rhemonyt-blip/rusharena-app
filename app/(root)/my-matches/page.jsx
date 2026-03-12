@@ -13,7 +13,7 @@ export default function MyMatches() {
         const { value } = await Preferences.get({ key: "access_token" });
 
         const { data } = await axios.get(
-          `${process.env.WEB_URL}api/mymatch/?authId=${value}&matchList=true`
+          `/api/mymatch/?authId=${value}&matchList=true`
         );
         if (data.success) {
           setmatches(data?.data?.matches);

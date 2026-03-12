@@ -35,7 +35,7 @@ export default function AppInit() {
       const { value: userId } = await Preferences.get({ key: "access_token" });
       if (!userId) return;
 
-      await axios.post(`${process.env.WEB_URL}api/saveToken`, {
+      await axios.post(`/api/saveToken`, {
         token,
         userId,
         platform: Capacitor.getPlatform(),

@@ -44,7 +44,7 @@ export default function ProfilePage() {
         }
         setAuthId(value);
 
-        const res = await axios.get(`${process.env.WEB_URL}api/getuser`, {
+        const res = await axios.get(`/api/getuser`, {
           params: { authId: value }, // Axios handles encoding automatically
         });
 
@@ -70,7 +70,7 @@ export default function ProfilePage() {
     try {
       setLoading(true);
       data.authId = loggedAuth._id;
-      const response = await axios.post(`${process.env.WEB_URL}api/auth/changePassword`, data);
+      const response = await axios.post(`/api/auth/changePassword`, data);
 
       if (!response.success) {
         showToast(

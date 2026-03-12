@@ -71,7 +71,7 @@ export default function WithdrawPage() {
         if (!finalMessage) return;
 
         try {
-          const res = await axios.post(`${process.env.WEB_URL}api/send-notification`, {
+          const res = await axios.post(`/api/send-notification`, {
             message: finalMessage,
           });
 

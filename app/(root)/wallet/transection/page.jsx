@@ -37,7 +37,7 @@ export default function TransactionHistoryPage() {
         setLoading(false);
         return;
       }
-      const res = await axios.get(`${process.env.WEB_URL}api/wallets/transections`, {
+      const res = await axios.get(`/api/wallets/transections`, {
         params: {
           userId: userId,
           type: type,

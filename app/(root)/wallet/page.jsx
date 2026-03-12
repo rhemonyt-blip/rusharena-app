@@ -29,7 +29,7 @@ export default function CashBalanceCard() {
           return;
         }
 
-        const res = await axios.get(`${process.env.WEB_URL}api/getuser`, {
+        const res = await axios.get(`/api/getuser`, {
           params: { authId: value }, // Axios automatically encodes this
         });
         const data = await res.data;

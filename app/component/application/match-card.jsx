@@ -96,7 +96,7 @@ export default function MatchCards() {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const res = await axios.get(`${process.env.WEB_URL}api/matchFound`);
+        const res = await axios.get(`/api/matchFound`);
 
         await setCounts(res?.data?.data);
       } catch (err) {

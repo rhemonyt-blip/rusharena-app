@@ -25,7 +25,7 @@ export default function MatchJoinPage() {
     const fetchMatch = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${process.env.WEB_URL}api/matches/details`, {
+        const res = await axios.get(`/api/matches/details`, {
           params: { matchId },
         });
 
@@ -97,7 +97,7 @@ export default function MatchJoinPage() {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${process.env.WEB_URL}api/matches/join`, payload);
+      const res = await axios.post(`/api/matches/join`, payload);
       if (res.data.success) {
         showToast("success", "Joined successfully!");
 

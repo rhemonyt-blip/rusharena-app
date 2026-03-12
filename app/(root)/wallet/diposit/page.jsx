@@ -27,7 +27,7 @@ export default function DepositPage() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`${process.env.WEB_URL}api/wallets/diposit/getNumber`);
+        const { data } = await axios.get(`/api/wallets/diposit/getNumber`);
         if (data.success) {
           setNumbers({ Bkash: data.data.Bkash, Nagad: data.data.Nagad });
         }
