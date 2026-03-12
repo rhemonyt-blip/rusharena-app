@@ -16,9 +16,11 @@ export default function MatchDetails() {
   const [userAuthId, setUserAuthId] = useState(null);
 
   // get logged user authId
-  useEffect(() => {
-    const authId = localStorage.getItem("authId");
-    setUserAuthId(authId);
+  useEffect(async() => {
+    const { value } = await Preferences.get({ key: "access_token" });
+console.log(value);
+
+    setUserAuthId("69859f1fe6951ab4900f1a0b");
   }, []);
 
   useEffect(() => {
