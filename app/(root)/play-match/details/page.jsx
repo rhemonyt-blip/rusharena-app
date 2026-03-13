@@ -27,7 +27,7 @@ export default function MatchDetails() {
       console.log(value);
 
       // TODO: decode token and get authId
-      setUserAuthId("69859f1fe6951ab4900f1a0b");
+      setUserAuthId(value);
     };
 
     getUser();
@@ -259,13 +259,14 @@ export default function MatchDetails() {
 
       {/* Edit Username UI */}
       {editMode && (
-        <div className="fixed bottom-4 left-0 right-0 bg-gray-900 p-4 flex flex-col items-center">
+        <div className="fixed top-0 bottom-0 left-0 right-0 bg-gray-900 p-4 flex flex-col items-center">
+          <div className="text-white font-bold text-lg mb-4 items-center flex flex-col">
           <input
             type="text"
             placeholder="Enter new username"
             value={editingUserName}
             onChange={(e) => setEditingUserName(e.target.value)}
-            className="w-full max-w-md mx-auto p-3 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full max-w-md mx-auto p-3 rounded- bg-gray-400 text-white focus:ring-2 focus:ring-green-400"
           />
 
           <button
@@ -281,6 +282,7 @@ export default function MatchDetails() {
           >
             Cancel
           </button>
+            </div>
         </div>
       )}
     </div>
