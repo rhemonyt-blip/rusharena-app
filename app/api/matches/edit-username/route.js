@@ -27,8 +27,9 @@ export async function POST(req) {
 
     return NextResponse.json({
       success: true,
-      message: "Username updated successfully",
-      data: { player: match.joinedPlayers[playerIndex], joinedPlayers: match.joinedPlayers, matchId: match._id, authId: authId },
+      message: "Username ",
+      data: match.joinedPlayers.findIndex(
+        (p) => p.authId === authId ) || null,
     });
    
     if (playerIndex === -1) {
