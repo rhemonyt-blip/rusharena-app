@@ -13,29 +13,16 @@ import {
 } from "@/config";
 
 export default function MatchRule({ matchType }) {
-  const MatchTypes = {
-    MatchType1:  MatchType1 ,
-    MatchType2:  MatchType2 ,
-    MatchType3:  MatchType3 ,
-    MatchType4:  MatchType4 ,
-    MatchType5:  MatchType5 ,
-    MatchType6:  MatchType6 ,
-    MatchType7:  MatchType7 ,
-    MatchType8:  MatchType8 ,
-    MatchType9:  MatchType9 ,
-    MatchType10: MatchType10 ,
-  };
 
-  function getMatchTypeNumber(value) {
-    const entry = Object.entries(MatchTypes).find(([key, val]) => val === value);
-    if (!entry) return null;
-    return entry[0].replace("MatchType", "");
-  }
+
  
     
   const contents = [
     // --- BR Match Rules (example same as your image) ---
     <>
+      <p className="text-yellow-400 font-semibold text-lg mt-3">
+        ⚙️ CS এর নিয়মাবলি:
+      </p>
       <p className="text-yellow-400 mt-3">
         ⚠️ অ্যাপের মধ্যে আপনি যত নাম্বারে জয়েন হবেন গেমের মধ্যেও ঠিক একই নাম্বার
         স্লটে আপনাকে থাকতে হবে। অন্যথায় কিক দেওয়া হবে।
@@ -732,6 +719,18 @@ export default function MatchRule({ matchType }) {
     </>,
     "",
   ];
+  const MatchTypes = {
+    [MatchType1]: contents[1],
+    [MatchType2]: contents[2],
+    [MatchType3]: contents[3],
+    [MatchType4]: contents[4],
+    [MatchType5]: contents[5],
+    [MatchType6]: contents[6],
+    [MatchType7]: contents[7],
+    [MatchType8]: contents[8],
+    [MatchType9]: contents[9],
+    [MatchType10]: contents[10],
+  };
 
   return (
     <div className=" bg-[#0a0a1a] text-white p-4">
@@ -749,7 +748,8 @@ export default function MatchRule({ matchType }) {
   
 
       <div className="bg-gray-900 p-4 rounded-2xl shadow-lg text-sm leading-relaxed">
-        {contents[getMatchTypeNumber(matchType)-1]}
+        {/* {contents[getMatchTypeNumber(matchType)-1]} */}
+        {MatchTypes[matchType] || <p className="text-center text-gray-500">No rules available for this match type.</p>  }
       </div>
 
  

@@ -490,6 +490,8 @@ export default function RulesPage() {
       const scrollLeft = tabLeft - (containerWidth / 2 - tabWidth / 2);
       container.scrollTo({ left: scrollLeft, behavior: "smooth" });
     }
+
+    
   }, [activeTab]);
 
   return (
