@@ -17,7 +17,7 @@ export async function POST(req) {
     const result = await matches.updateOne(
       {
         _id: matchId,
-        "joinedPlayers.authId": authId,
+        "joinedPlayers._id": authId,
       },
       {
         $set: {

@@ -15,6 +15,7 @@ export default function MatchDetails() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userAuthId, setUserAuthId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const [editMode, setEditMode] = useState(false);
   const [editingUserName, setEditingUserName] = useState("");
@@ -68,7 +69,7 @@ export default function MatchDetails() {
     try {
       const res = await axios.post("/api/matches/edit-username", {
         matchId,
-        authId: userAuthId,
+        authId: userId,
         name: editingUserName,
       });
 
@@ -239,6 +240,7 @@ export default function MatchDetails() {
                             setEditMode(true);
                             setEditingUserName(player.name);
                             setEditingPlayer(player);
+                            setUserId(player._id);
                           }}
                         >
                           Edit
