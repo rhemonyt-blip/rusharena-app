@@ -3,7 +3,7 @@ import { catchError, response } from "@/lib/healperFunc";
 import { connectDB } from "@/lib/connectDB";
 import matches from "@/models/matches";
 
-export async function PUT(req) {
+export async function POST(req) {
   try {
     await connectDB();
 

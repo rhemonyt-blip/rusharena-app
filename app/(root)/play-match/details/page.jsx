@@ -66,7 +66,7 @@ export default function MatchDetails() {
     }
 
     try {
-      const res = await axios.put("/api/matches/edit-username", {
+      const res = await axios.post("/api/matches/edit-username", {
         matchId,
         authId: userAuthId,
         name: editingUserName,
