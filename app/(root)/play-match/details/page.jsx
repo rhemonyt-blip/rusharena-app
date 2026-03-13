@@ -16,12 +16,21 @@ export default function MatchDetails() {
   const [loading, setLoading] = useState(true);
   const [userAuthId, setUserAuthId] = useState(null);
 
-  // get logged user authId
-  useEffect(async() => {
-    const { value } = await Preferences.get({ key: "access_token" });
-console.log(value);
+  const [editMode, setEditMode] = useState(false);
+  const [editingUserName, setEditingUserName] = useState("");
+  const [editingPlayer, setEditingPlayer] = useState(null);
 
-    setUserAuthId("69859f1fe6951ab4900f1a0b");
+  // get logged user authId
+  useEffect(() => {
+    const getUser = async () => {
+      const { value } = await Preferences.get({ key: "access_token" });
+      console.log(value);
+
+      // TODO: decode token and get authId
+      setUserAuthId("69859f1fe6951ab4900f1a0b");
+    };
+
+    getUser();
   }, []);
 
   useEffect(() => {
@@ -49,28 +58,34 @@ console.log(value);
     fetchMatch();
   }, [matchId]);
 
-  // EDIT USERNAME LOGIC
-  const handleEditUsername = async (player) => {
-    const newName = prompt("Enter your new username", player.name);
-
-    if (!newName || newName.trim() === "" || newName === player.name) return;
+  // UPDATE USERNAME FUNCTION
+  const updateUsername = async () => {
+    if (!editingUserName || editingUserName.trim() === "") {
+      showToast(false, "Username cannot be empty");
+      return;
+    }
 
     try {
       const res = await axios.put("/api/matches/update-username", {
         matchId,
-        authId: userAuthId,
-        name: newName,
+        authId: editingPlayer.authId,
+        name: editingUserName,
       });
 
       if (res.data?.success) {
-        // update UI instantly
         const updatedPlayers = players.map((p) =>
-          p.authId === userAuthId ? { ...p, name: newName } : p
+          p.authId === editingPlayer.authId
+            ? { ...p, name: editingUserName }
+            : p
         );
 
         setPlayers(updatedPlayers);
 
         showToast(true, "Username updated successfully");
+
+        setEditMode(false);
+        setEditingPlayer(null);
+        setEditingUserName("");
       } else {
         showToast(false, "Failed to update username");
       }
@@ -117,8 +132,7 @@ console.log(value);
           </p>
 
           <p>
-            <span className="font-semibold">Total Spots:</span>{" "}
-            {match.totalSpots}
+            <span className="font-semibold">Total Spots:</span> {match.totalSpots}
           </p>
 
           <p>
@@ -218,12 +232,16 @@ console.log(value);
                     >
                       {player.name || "N/A"}
 
-                      {player.authId &&(
+                      {player.authId === userAuthId && (
                         <button
-                          className="ml-3 text-xs text-gray-400 hover:text-gray-200 transition"
-                          onClick={() => handleEditUsername(player)}
+                          className="ml-3 bg-gray-700 text-gray-200 hover:bg-gray-600 px-3 py-1 rounded-full text-xs"
+                          onClick={() => {
+                            setEditMode(true);
+                            setEditingUserName(player.name);
+                            setEditingPlayer(player);
+                          }}
                         >
-                          Edit username
+                          Edit
                         </button>
                       )}
                     </td>
@@ -238,6 +256,33 @@ console.log(value);
           </p>
         )}
       </div>
+
+      {/* Edit Username UI */}
+      {editMode && (
+        <div className="fixed bottom-4 left-0 right-0 bg-gray-900 p-4 flex flex-col items-center">
+          <input
+            type="text"
+            placeholder="Enter new username"
+            value={editingUserName}
+            onChange={(e) => setEditingUserName(e.target.value)}
+            className="w-full max-w-md mx-auto p-3 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+
+          <button
+            onClick={updateUsername}
+            className="mt-3 w-full max-w-md mx-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition"
+          >
+            Update Username
+          </button>
+
+          <button
+            onClick={() => setEditMode(false)}
+            className="mt-2 text-gray-400 text-sm"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 }
