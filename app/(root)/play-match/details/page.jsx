@@ -259,8 +259,8 @@ export default function MatchDetails() {
 
       {/* Edit Username UI */}
       {editMode && (
-        <div className="fixed top-0 bottom-0 left-0 right-0 bg-gray-900 p-4 flex flex-col items-center">
-          <div className="text-white font-bold text-lg mb-4 items-center flex flex-col">
+        <div className="fixed top-[50%] bottom-[50%] z-999 w-full h-full left-0 right-0 bg-gray-400  flex flex-col items-center">
+          <div className="text-white font-bold text-lg mb-4 bg-gray-900 p-4 items-center flex flex-col">
           <input
             type="text"
             placeholder="Enter new username"
@@ -271,14 +271,14 @@ export default function MatchDetails() {
 
           <button
             onClick={updateUsername}
-            className="mt-3 w-full max-w-md mx-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition"
+            className="mt-3 w-full max-w-md mx-auto bg-green-600 text-white font-bold p-2 rounded-full transition"
           >
-            Update Username
+            Update
           </button>
 
           <button
             onClick={() => setEditMode(false)}
-            className="mt-2 text-gray-400 text-sm"
+            className="mt-2 text-gray-800 text-sm"
           >
             Cancel
           </button>
