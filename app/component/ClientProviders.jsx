@@ -18,9 +18,7 @@ export default function ClientProviders({ children }) {
       <InternetChecker>
         <BrowserOverlay>
           <SessionProvider>
-            {/* <ProtectedRoute> */}
-            {children}
-            {/* </ProtectedRoute> */}
+            <ProtectedRoute>{children}</ProtectedRoute>
           </SessionProvider>
         </BrowserOverlay>
       </InternetChecker>
