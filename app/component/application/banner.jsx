@@ -7,9 +7,27 @@ import Link from "next/link";
 import { banner1, banner2, banner3 } from "@/config";
 
 const slides = [
-  { id: 1, image: "/images/banner/banner1.jpg", link: banner1 },
-  { id: 2, image: "/images/banner/banner2.jpg", link: banner2 },
-  { id: 3, image: "/images/banner/banner3.jpg", link: banner3 },
+  {
+    id: 1,
+    image:
+      "https://res.cloudinary.com/dnvlk6ubg/image/upload/banner1_gvtnkb.jpg" ||
+      "/images/banner/banner1.jpg",
+    link: banner1,
+  },
+  {
+    id: 2,
+    image:
+      "https://res.cloudinary.com/dnvlk6ubg/image/upload/banner2_zfybpk.jpg" ||
+      "/images/banner/banner2.jpg",
+    link: banner2,
+  },
+  {
+    id: 3,
+    image:
+      "https://res.cloudinary.com/dnvlk6ubg/image/upload/banner3_o00j5n.jpg" ||
+      "/images/banner/banner3.jpg",
+    link: banner3,
+  },
 ];
 
 export default function BannerSlider() {

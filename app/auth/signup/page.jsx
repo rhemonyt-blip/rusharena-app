@@ -131,7 +131,7 @@ export default function SignupPage() {
           <button
             type="button"
             onClick={() => signIn("google")}
-            className="w-full border p-2 rounded-md flex items-center justify-center gap-2 mb-4 hover:bg-gray-100 transition"
+            className="w-full border p-2 rounded-md flex items-center justify-center gap-2 mb-4 bg-cyan-500 hover:bg-cyan-700 transition"
           >
             Continue with Google
           </button>
