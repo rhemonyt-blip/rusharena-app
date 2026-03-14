@@ -1,27 +1,22 @@
-
 import {
   MatchType1,
- MatchType2,
- MatchType3,
- MatchType4,
- MatchType5,
- MatchType6,
- MatchType7,
- MatchType8,
- MatchType9,
- MatchType10,
+  MatchType2,
+  MatchType3,
+  MatchType4,
+  MatchType5,
+  MatchType6,
+  MatchType7,
+  MatchType8,
+  MatchType9,
+  MatchType10,
 } from "@/config";
 
 export default function MatchRule({ matchType }) {
-
-
- 
-    
   const contents = [
     // --- BR Match Rules (example same as your image) ---
     <>
       <p className="text-yellow-400 font-semibold text-lg mt-3">
-        ⚙️ CS এর নিয়মাবলি:
+        ⚙️ BR এর নিয়মাবলি:
       </p>
       <p className="text-yellow-400 mt-3">
         ⚠️ অ্যাপের মধ্যে আপনি যত নাম্বারে জয়েন হবেন গেমের মধ্যেও ঠিক একই নাম্বার
@@ -96,7 +91,7 @@ export default function MatchRule({ matchType }) {
         ✅ “ADMIN” এর সিদ্ধান্তই চূড়ান্ত সিদ্ধান্ত।
       </p>
     </>,
-    
+
     <>
       <p className="text-yellow-400 font-semibold text-lg mt-3">
         ⚙️ CS এর নিয়মাবলি:
@@ -592,7 +587,7 @@ export default function MatchRule({ matchType }) {
         টাকা রিফান্ড করা হবে না।
       </p>
     </>,
-    
+
     <>
       <p className="text-yellow-400 font-semibold text-lg mt-3">
         🎲 Rush ARena Match নিয়মাবলি:
@@ -737,27 +732,18 @@ export default function MatchRule({ matchType }) {
       <h1 className="text-center text-2xl font-bold mb-4">All Rules</h1>
 
       {/* Tabs */}
-      <div
-       
-        className="flex overflow-x-auto space-x-2 mt-4 mb-6 no-scrollbar"
-      >
-  
-      </div>
+      <div className="flex overflow-x-auto space-x-2 mt-4 mb-6 no-scrollbar"></div>
 
       {/* Content */}
-  
 
       <div className="bg-gray-900 p-4 rounded-2xl shadow-lg text-sm leading-relaxed">
         {/* {contents[getMatchTypeNumber(matchType)-1]} */}
-        {MatchTypes[matchType] || <p className="text-center text-gray-500">No rules available for this match type.</p>  }
+        {MatchTypes[matchType] || (
+          <p className="text-center text-gray-500">
+            No rules available for this match type.
+          </p>
+        )}
       </div>
-
- 
     </div>
-  
   );
 }
-
-
-
-
