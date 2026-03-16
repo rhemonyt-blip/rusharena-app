@@ -1,17 +1,37 @@
-// pages/api/checkBannedToken.js
+// app/api/checkBannedToken/route.js
+
 import { connectDB } from "@/lib/connectDB";
-import bannedUsers from "@/models/bannedUser";
+import bannedUser from "@/models/bannedUser";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+export async function POST(req) {
+  try {
+    const body = await req.json();
+    const { token } = body;
 
-  const { token } = req.body;
+    // Validate token
+    if (!token || typeof token !== "string") {
+      return new Response(
+        JSON.stringify({ success: false, message: "Invalid or missing token" }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
 
-  await connectDB();
-  console.log(token);
+    // Connect to DB
+    await connectDB();
 
-  const banned = await bannedUsers.findOne({
-    userId: "69579f2bf56c8965d8ba7d3f",
-  });
-  res.status(200).json({ isBanned: !!banned });
+    // Check if token is banned
+    const banned = await bannedUser.findOne({ token }).lean();
+
+    return new Response(JSON.stringify({ success: true, isBanned: !!banned }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("❌ Error checking banned token:", err);
+
+    return new Response(
+      JSON.stringify({ success: false, message: "Server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
+  }
 }

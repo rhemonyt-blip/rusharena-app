@@ -25,6 +25,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const [bannedstatus, setBannedStatus] = useState(false);
   const {
     register,
     handleSubmit,
@@ -41,6 +42,15 @@ export default function LoginPage() {
       // Send login request
       const res = await axios.post(`/api/auth/login`, formData);
       const loginResponse = res.data;
+
+      if (loginResponse.statusCode === 203) {
+        showToast("error", loginResponse.message || "Your account is banned");
+        setBannedStatus(true);
+        setTimeout(() => {
+          setBannedStatus(false);
+        }, 300000);
+        return;
+      }
 
       if (!loginResponse.success) {
         showToast("error", loginResponse.message || "Login failed");
@@ -155,6 +165,19 @@ export default function LoginPage() {
           </div>
         </CardContent>
       </Card>
+      {bannedstatus && (
+        <div className="min-h-screen  fixed w-full flex flex-col z-9999 items-center justify-center bg-gray-950 text-gray-100  px-4">
+          <h1 className="text-4xl font-bold text-red-500 mb-4">
+            🚫 Access Restricted
+          </h1>
+          <p className="text-xl bold mb-6 text-center text-green-700 max-w-md">
+            Your device has been banned from accessing this application. <br />
+            <br />
+            Please contact the Admin for more information or to resolve this
+            issue.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

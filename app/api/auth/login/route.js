@@ -3,6 +3,7 @@ import { loginSchema } from "@/lib/zodSchema";
 import { catchError } from "@/lib/healperFunc";
 import { connectDB } from "@/lib/connectDB";
 import cookie from "cookie";
+import bannedUser from "@/models/bannedUser";
 
 export async function POST(request) {
   try {
@@ -19,7 +20,7 @@ export async function POST(request) {
           message: "Invalid or missing input field!",
           error: validatedData.error,
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -34,7 +35,7 @@ export async function POST(request) {
           statusCode: 401,
           message: "Invalid email or password!",
         }),
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -46,7 +47,28 @@ export async function POST(request) {
           statusCode: 401,
           message: "Invalid email or password!",
         }),
-        { status: 401 }
+        { status: 401 },
+      );
+    }
+
+    // ✅ Check if user is banned after successful password validation
+    const banned = await bannedUser.findOne({ email }).lean();
+    if (banned) {
+      // Set cookie
+      const headers = {
+        "Set-Cookie": cookie.serialize("banned", "true", {
+          httpOnly: false, // frontend/Capacitor can read it
+          path: "/",
+          sameSite: "lax",
+        }),
+      };
+      return new Response(
+        JSON.stringify({
+          success: false,
+          statusCode: 203,
+          message: "Your account has been banned. Please contact admin.",
+        }),
+        { status: 203 },
       );
     }
 
@@ -70,10 +92,11 @@ export async function POST(request) {
         message: "Login successful",
         data: {
           _id: checkUser._id,
+          email: checkUser.email,
         },
         token, // also send token for Capacitor storage
       }),
-      { headers }
+      { headers },
     );
   } catch (error) {
     return catchError(error);
