@@ -127,11 +127,10 @@ export default function SignupPage() {
           <button
             type="button"
             onClick={() => signIn("google")}
-            className="w-full border p-2 rounded-md flex items-center justify-center gap-2 mb-4 bg-cyan-500 hover:bg-cyan-700 transition"
+            className="w-full border p-2 rounded-md flex items-center justify-center gap-2 mb-4 bg-cyan-500 hover:bg-cyan-700 transition transform hover:scale-105 animate-pulse"
           >
             Continue with Google
           </button>
-
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Name */}
             <div className="space-y-1">
@@ -163,7 +162,7 @@ export default function SignupPage() {
 
               {/* Display only */}
               <div className="p-2 border rounded-md bg-gray-100 text-gray-700">
-                {session?.user?.email || "Loading..."}
+                {session?.user?.email}
               </div>
 
               {errors.email && (
