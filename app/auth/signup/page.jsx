@@ -162,7 +162,7 @@ export default function SignupPage() {
               />
 
               {/* Display only */}
-              <div className="p-2 border rounded-md bg-gray-100 text-gray-700">
+              <div className="p-2 border h-10 rounded-md bg-gray-100 text-gray-700">
                 {session?.user?.email}
               </div>
 
