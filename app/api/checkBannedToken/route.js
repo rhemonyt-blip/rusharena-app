@@ -6,7 +6,7 @@ import bannedUser from "@/models/bannedUser";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { token } = body;
+    const { token, email } = body;
 
     // Validate token
     if (!token || typeof token !== "string") {
@@ -20,12 +20,19 @@ export async function POST(req) {
     await connectDB();
 
     // Check if token is banned
-    const banned = await bannedUser.findOne({ token }).lean();
+    const bannedToken = await bannedUser.findOne({ token }).lean();
+    const bannedEmail = await bannedUser.findOne({ email }).lean();
 
-    return new Response(JSON.stringify({ success: true, isBanned: !!banned }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        isBanned: !!bannedToken || !!bannedEmail,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   } catch (err) {
     console.error("❌ Error checking banned token:", err);
 

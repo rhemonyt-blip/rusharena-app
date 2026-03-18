@@ -62,6 +62,7 @@ export default function LoginPage() {
       // Save token in Capacitor Preferences (works in APK + web)
       if (token) {
         await Preferences.set({ key: "access_token", value: token });
+        await Preferences.set({ key: "user_email", value: formData.email });
       }
 
       reset();

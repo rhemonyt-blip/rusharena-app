@@ -37,9 +37,15 @@ export default function BannedCheckRoute() {
             );
           });
 
+          // Get user email from preferences (or use empty string if not found)
+          const { value: email } = await Preferences.get({
+            key: "user_email",
+          });
+
           // Call banned token API
           const res = await axios.post("/api/checkBannedToken", {
             token: deviceToken,
+            email,
           });
 
           const isBanned = res.data?.success && res.data.isBanned;

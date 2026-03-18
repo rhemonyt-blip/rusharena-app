@@ -83,6 +83,7 @@ export default function SignupPage() {
       const token = signupResponse.token;
       if (token) {
         await Preferences.set({ key: "access_token", value: token });
+        await Preferences.set({ key: "user_email", value: email });
       }
 
       reset();
