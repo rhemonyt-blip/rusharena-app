@@ -161,7 +161,6 @@ export default function SignupPage() {
               <Label htmlFor="email">Email</Label>
 
               <Input
-                readOnly
                 id="email"
                 type="email"
                 autoComplete="email"
