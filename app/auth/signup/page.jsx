@@ -39,21 +39,23 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
   });
 
-  // Remove spaces from username
+  // 🔹 Remove spaces from username
   const sanitizeUsername = (name) => {
     if (!name) return "";
     return name.replace(/\s+/g, "");
   };
 
-  // Autofill Google data
+  // 🔹 Autofill Google data
   useEffect(() => {
     if (session?.user) {
       const cleanName = sanitizeUsername(session.user.name);
-      if (cleanName) {
-        setValue("name", cleanName);
-      }
+
       if (session.user.email) {
         setValue("email", session.user.email);
+      }
+
+      if (cleanName) {
+        setValue("name", cleanName);
       }
     }
   }, [session, setValue]);
@@ -62,13 +64,8 @@ export default function SignupPage() {
     try {
       setLoading(true);
 
-      // Force email from session
-      const email = session?.user?.email;
-      if (!email) throw new Error("Email not available");
-
       const payload = {
         ...data,
-        email, // trusted session email
         name: sanitizeUsername(data.name),
       };
 
@@ -81,16 +78,22 @@ export default function SignupPage() {
       }
 
       const token = signupResponse.token;
+
       if (token) {
-        await Preferences.set({ key: "access_token", value: token });
-        await Preferences.set({ key: "user_email", value: email });
+        await Preferences.set({
+          key: "access_token",
+          value: token,
+        });
       }
 
       reset();
+
       showToast("success", signupResponse.message || "Signup successful");
+
       router.push("https://www.rusharena.club/");
     } catch (error) {
       console.error("Signup error:", error);
+
       showToast(
         "error",
         error?.response?.data?.message ||
@@ -132,10 +135,12 @@ export default function SignupPage() {
           >
             Continue with Google
           </button>
+
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Name */}
             <div className="space-y-1">
               <Label htmlFor="name">User Name</Label>
+
               <Input
                 id="name"
                 placeholder="JohnDoe"
@@ -145,6 +150,7 @@ export default function SignupPage() {
                   setValue("name", sanitizeUsername(e.target.value))
                 }
               />
+
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name.message}</p>
               )}
@@ -152,19 +158,16 @@ export default function SignupPage() {
 
             {/* Email */}
             <div className="space-y-1">
-              <Label>Email</Label>
+              <Label htmlFor="email">Email</Label>
 
-              {/* Hidden input to satisfy react-hook-form */}
-              <input
-                type="hidden"
-                value={session?.user?.email || ""}
+              <Input
+                readOnly
+                id="email"
+                type="email"
+                autoComplete="email"
+                placeholder="example@gmail.com"
                 {...register("email")}
               />
-
-              {/* Display only */}
-              <div className="p-2 border h-10 rounded-md bg-gray-100 text-gray-700">
-                {session?.user?.email}
-              </div>
 
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -174,6 +177,7 @@ export default function SignupPage() {
             {/* Phone */}
             <div className="space-y-1">
               <Label htmlFor="phone">Phone</Label>
+
               <Input
                 id="phone"
                 type="text"
@@ -181,6 +185,7 @@ export default function SignupPage() {
                 placeholder="01xxxxxxxxx"
                 {...register("phone")}
               />
+
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone.message}</p>
               )}
@@ -189,6 +194,7 @@ export default function SignupPage() {
             {/* Password */}
             <div className="space-y-1">
               <Label htmlFor="password">Password</Label>
+
               <div className="relative">
                 <Input
                   id="password"
@@ -198,6 +204,7 @@ export default function SignupPage() {
                   {...register("password")}
                   className="pr-10"
                 />
+
                 <button
                   type="button"
                   aria-label="toggle password"
@@ -211,6 +218,7 @@ export default function SignupPage() {
                   )}
                 </button>
               </div>
+
               {errors.password && (
                 <p className="text-red-500 text-sm">
                   {errors.password.message}
@@ -221,6 +229,7 @@ export default function SignupPage() {
             {/* Confirm Password */}
             <div className="space-y-1">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
+
               <div className="relative">
                 <Input
                   id="confirmPassword"
@@ -230,6 +239,7 @@ export default function SignupPage() {
                   {...register("confirmPassword")}
                   className="pr-10"
                 />
+
                 <button
                   type="button"
                   aria-label="toggle confirm password"
@@ -243,6 +253,7 @@ export default function SignupPage() {
                   )}
                 </button>
               </div>
+
               {errors.confirmPassword && (
                 <p className="text-red-500 text-sm">
                   {errors.confirmPassword.message}
