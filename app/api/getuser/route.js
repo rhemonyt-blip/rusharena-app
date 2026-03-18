@@ -20,7 +20,7 @@ export async function GET(request) {
     const authUser = await User.findById(authId).lean();
 
     if (!authUser) {
-      return response(false, 404, " Unauthorized User!");
+      return response(false, 404, " Unauthorized User!!");
     }
 
     return new Response(
@@ -29,7 +29,7 @@ export async function GET(request) {
         status: 200,
         headers: { "Content-Type": "application/json" },
       },
-      { headers: corsHeaders() }
+      { headers: corsHeaders() },
     );
   } catch (error) {
     console.error("API error:", error);
@@ -41,7 +41,7 @@ export async function GET(request) {
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   }
 }

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { PushNotifications } from "@capacitor/push-notifications";
+import { Preferences } from "@capacitor/preferences";
 import { Capacitor } from "@capacitor/core";
 import axios from "axios";
 
@@ -43,16 +44,21 @@ export default function BannedCheckRoute() {
 
           const isBanned = res.data?.success && res.data.isBanned;
 
-          // Redirect banned users to noticed page
-          if (isBanned && pathname !== "/banned/noticed") {
-            router.replace("/banned/noticed");
-            return;
-          }
+          if (isBanned) {
+            // Remove access_token if banned
+            await Preferences.remove({ key: "access_token" });
 
-          // Redirect non-banned users away from noticed page
-          if (!isBanned && pathname === "/banned/noticed") {
-            router.replace("/");
-            return;
+            // Optional: redirect to banned page
+            if (pathname !== "/banned/noticed") {
+              router.replace("/banned/noticed");
+              return;
+            }
+          } else {
+            // Optional: redirect non-banned users away from noticed page
+            if (pathname === "/banned/noticed") {
+              router.replace("/");
+              return;
+            }
           }
         }
       } catch (error) {
