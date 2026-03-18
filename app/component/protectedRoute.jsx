@@ -11,7 +11,8 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const { value } = await Preferences.get({ key: "user_email" });
+        // const { value } = await Preferences.get({ key: "user_email" });
+        const { value } = await Preferences.get({ key: "access_token" });
 
         if (!value) {
           // User not logged in → redirect away from protected routes
