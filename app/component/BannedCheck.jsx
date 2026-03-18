@@ -65,5 +65,5 @@ export default function BannedCheckRoute() {
     checkBanned();
   }, [router, pathname]);
 
-  return null;
+  return "";
 }

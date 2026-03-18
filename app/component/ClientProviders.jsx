@@ -19,9 +19,7 @@ export default function ClientProviders({ children }) {
       <InternetChecker>
         <BrowserOverlay>
           <SessionProvider>
-            <ProtectedRoute>
-              <BannedCheckRoute>{children}</BannedCheckRoute>
-            </ProtectedRoute>
+            <ProtectedRoute>{children}</ProtectedRoute>
           </SessionProvider>
         </BrowserOverlay>
       </InternetChecker>
