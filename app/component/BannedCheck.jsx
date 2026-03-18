@@ -5,7 +5,7 @@ import { PushNotifications } from "@capacitor/push-notifications";
 import { Capacitor } from "@capacitor/core";
 import axios from "axios";
 
-export default function BannedCheckRoute({ children }) {
+export default function BannedCheckRoute() {
   const [checking, setChecking] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
@@ -65,13 +65,5 @@ export default function BannedCheckRoute({ children }) {
     checkBanned();
   }, [router, pathname]);
 
-  if (checking) {
-    return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  return children;
+  return null;
 }
