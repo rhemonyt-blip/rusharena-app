@@ -11,6 +11,8 @@ export default function Navbar() {
   const [balanceAmount, setBalance] = useState(0);
   const [reloadSpin, setReloadSpin] = useState(false);
 
+  const [bannedstatus, setBannedStatus] = useState(false);
+
   useEffect(() => {
     async function loadUser() {
       try {
@@ -22,8 +24,12 @@ export default function Navbar() {
         }
 
         // ✅ Fetch user by authId
-        const res = await axios.get(`/api/getuser/?authId=${value}` );
+        const res = await axios.get(`/api/getuser/?authId=${value}`);
 
+        if (res.data?.isBanned) {
+          setBannedStatus(true);
+          return;
+        }
         // ✅ Handle both formats: { success: true } OR { message: "Success" }
         if (
           (res.data?.success || res.data?.message === "Success") &&
@@ -55,43 +61,61 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 min-h-[38px] bg-[#0A0020] flex justify-between py-3 px-6 shadow-[0_-1px_10px_rgba(0,0,0,0.4)] z-99">
-      {/* Left side: Logo and name */}
-      <div className="flex items-center space-x-2">
-        <Image
-          src="/images/logo.jpg"
-          alt="Logo"
-          width={52}
-          height={52}
-          className="rounded-full object-cover h-auto"
-        />
-        <h1 className="text-xl font-black text-yellow-400 uppercase tracking-tighter drop-shadow-[2px_2px_0_#000]">
-          Rush Arena
-        </h1>
-      </div>
+    <>
+      <nav className="fixed top-0 left-0 right-0 min-h-[38px] bg-[#0A0020] flex justify-between py-3 px-6 shadow-[0_-1px_10px_rgba(0,0,0,0.4)] z-99">
+        {/* Left side: Logo and name */}
+        <div className="flex items-center space-x-2">
+          <Image
+            src="/images/logo.jpg"
+            alt="Logo"
+            width={52}
+            height={52}
+            className="rounded-full object-cover h-auto"
+          />
+          <h1 className="text-xl font-black text-yellow-400 uppercase tracking-tighter drop-shadow-[2px_2px_0_#000]">
+            Rush Arena
+          </h1>
+        </div>
 
-      {/* Right side: Wallet section */}
-      <div className="flex items-center gap-2">
-        <Image
-          src="/images/assets/wallet.jpg"
-          alt="wallet"
-          width={40}
-          height={40}
-          className="rounded h-auto object-cover"
-        />
-        <span className="font-medium text-white">
-          ৳ {isNaN(Number(balanceAmount)) ? 0 : Number(balanceAmount)}
-        </span>
-      </div>
+        {/* Right side: Wallet section */}
+        <div className="flex items-center gap-2">
+          <Image
+            src="/images/assets/wallet.jpg"
+            alt="wallet"
+            width={40}
+            height={40}
+            className="rounded h-auto object-cover"
+          />
+          <span className="font-medium text-white">
+            ৳ {isNaN(Number(balanceAmount)) ? 0 : Number(balanceAmount)}
+          </span>
+        </div>
 
-      {/* Reload Button */}
-      <button
-        onClick={handleReload}
-        disabled={reloadSpin}
-        className="flex items-center gap-2 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition"
-      >
-        <RotateCcw className={`w-5 h-5 ${reloadSpin ? "animate-spin" : ""}`} />
-      </button>
-    </nav>
+        {/* Reload Button */}
+        <button
+          onClick={handleReload}
+          disabled={reloadSpin}
+          className="flex items-center gap-2 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition"
+        >
+          <RotateCcw
+            className={`w-5 h-5 ${reloadSpin ? "animate-spin" : ""}`}
+          />
+        </button>
+      </nav>
+
+      {bannedstatus && (
+        <div className="min-h-screen  fixed w-full flex flex-col z-9999 items-center justify-center bg-gray-950 text-gray-100  px-4">
+          <h1 className="text-4xl font-bold text-red-500 mb-4">
+            🚫 Access Restricted
+          </h1>
+          <p className="text-xl bold mb-6 text-center text-green-700 max-w-md">
+            Your device has been banned from accessing this application. <br />
+            <br />
+            Please contact the Admin for more information or to resolve this
+            issue.
+          </p>
+        </div>
+      )}
+    </>
   );
 }
