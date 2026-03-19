@@ -6,17 +6,17 @@ import Image from "next/image";
 export default function BrowserOverlay({ children }) {
   const [showOverlay, setShowOverlay] = useState(false);
 
-  // useEffect(() => {
-  //   const isCapacitorEnv =
-  //     typeof window !== "undefined" &&
-  //     typeof window.Capacitor !== "undefined" &&
-  //     typeof window.Capacitor.isNativePlatform === "function" &&
-  //     window.Capacitor.isNativePlatform();
+  useEffect(() => {
+    const isCapacitorEnv =
+      typeof window !== "undefined" &&
+      typeof window.Capacitor !== "undefined" &&
+      typeof window.Capacitor.isNativePlatform === "function" &&
+      window.Capacitor.isNativePlatform();
 
-  //   if (!isCapacitorEnv) {
-  //     setShowOverlay(true); // Show only in browsers
-  //   }
-  // }, []);
+    if (!isCapacitorEnv) {
+      setShowOverlay(true); // Show only in browsers
+    }
+  }, []);
 
   if (!showOverlay) return <>{children}</>;
 
@@ -65,12 +65,12 @@ export default function BrowserOverlay({ children }) {
           >
             📱 Download Rush Arena
           </a>
-          <button
+          {/* <button
             onClick={() => setShowOverlay(false)}
             className="px-8 py-3 border border-purple-400 text-purple-400 font-semibold rounded-full hover:bg-purple-400 hover:text-white transition transform hover:scale-105"
           >
             Open in Browser
-          </button>
+          </button> */}
         </div>
 
         {/* Stats Section */}
