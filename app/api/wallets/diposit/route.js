@@ -72,7 +72,7 @@ export async function POST(req) {
       // ✅ Verify SMS data matches request
       if (
         smsLog.senderNumber !== phone ||
-        smsLog.service !== method
+       
       ) {
         return response(false, 400, "Transaction details mismatch");
       }
