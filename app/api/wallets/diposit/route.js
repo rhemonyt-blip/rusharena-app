@@ -70,10 +70,7 @@ export async function POST(req) {
       }
 
       // ✅ Verify SMS data matches request
-      if (
-        smsLog.senderNumber !== phone ||
-       
-      ) {
+      if (smsLog.senderNumber !== phone) {
         return response(false, 400, "Transaction details mismatch");
       }
 
@@ -93,14 +90,14 @@ export async function POST(req) {
             createdAt: new Date(),
           },
         ],
-        { session }
+        { session },
       );
 
       // 2️⃣ Update user balance
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $inc: { dipositbalance: numericAmount } }, // ensure field name correct
-        { new: true, session }
+        { new: true, session },
       );
 
       if (!updatedUser) {
